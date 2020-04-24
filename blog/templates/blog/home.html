@@ -1,0 +1,27 @@
+{% extends "portfolio/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h1 id="blogtitle" class="font-weight-bold text-center">Blog</h1>
+
+<h3 class="text-center mb-5">SP13 Halo ona hamutuk {{ blogs.count }} blog{{ blogs.count|pluralize }} no Actividade</h3>
+
+{% for blog in blogs %}
+<div class="row justify-content-center my-3">
+  <div class="col-md-10">
+    <a href="{% url 'blog:detail' blog.id %}">
+      <h4>{{ blog.title }}</h4>
+    </a>
+    <h5 class="text-muted">{{ blog.date|date:'M d Y'|upper }}</h5>
+    <br>
+    <img src="{{ blog.image.url }}" width="40%" height="auto">
+    <br>
+    <h3> Kona ba Actividade {{ blog.title }}: </h3>
+    <p>{{ blog.description|striptags|truncatechars:100 }}</p>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
